@@ -5,7 +5,12 @@ import datetime, uuid
 class Post(object): #this post comes from an object
 
     # Basic PROPERTIES of a POST
-    def __init__(self, blog_id, title, content, author, created_date=datetime.datetime.utcnow(), _id=None): #default - only in the end
+    def __init__(self, blog_id,
+                 title,
+                 content,
+                 author,
+                 created_date=datetime.datetime.utcnow(),
+                 _id=None): #default - only in the end
         self.blog_id = blog_id
         self.title =  title
         self.content = content
