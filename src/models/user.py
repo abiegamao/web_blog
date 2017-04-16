@@ -82,10 +82,13 @@ class User(object):
                     author_id=self._id)
 
         blog.save_to_mongo()
-    
+
 
     @staticmethod
     def new_post(blog_id, title, content,
                  date=datetime.datetime.utcnow()):
         blog =  Blog.from_mongo(blog_id)
         blog.new_post(title, content, date)
+
+    def __getitem__(self, item):
+        return getattr(self, item)
