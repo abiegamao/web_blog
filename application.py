@@ -10,6 +10,10 @@ from flask import Flask
 app = Flask(__name__) #__main__
 app.secret_key = 'abz'
 
+@app.before_first_request # run method before the 1st request
+def initialize_database():
+    Database.initialize()
+
 @app.route('/') # www.mysite.com/api/
 def home():
     return render_template('base.html')
@@ -21,10 +25,6 @@ def login():
 @app.route('/register') # Register
 def register():
     return render_template('register.html')
-
-@app.before_first_request # run method before the 1st request
-def initialize_database():
-    Database.initialize()
 
 
 @app.route('/auth/login', methods=['POST'])
@@ -48,6 +48,18 @@ def register_user():
     User.register(email,password)
 
     return render_template('profile.html', email = session.get('email'))
+
+
+@app.route('/blogs/<string:user_id>')
+@app.route('/blogs')
+def user_blogs(user_id=None):
+    if user_id is not None:
+        user = User.get_by_id(user_id)
+    else:
+        user = User.get_by_email(session.get('email'))
+    blogs = user.get_blogs()
+
+    return render_template("user_blogs.html", blogs=blogs, email = user.email)
 
 @app.route('/hello/')
 @app.route('/hello/<name>')

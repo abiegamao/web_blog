@@ -4,7 +4,7 @@ from src.models.post import Post
 
 import uuid, datetime
 class Blog(object):
-    def __init__(self, author, title, description,author_id, _id=None):
+    def __init__(self, author, title, description, author_id, _id=None):
         self.author = author
         self.title = title
         self.description = description
@@ -34,13 +34,13 @@ class Blog(object):
             'author_id': self.author_id,
             'title': self.title,
             'description': self.description,
-            'id': self._id
+            '_id': self._id
         }
 
     @classmethod
-    def from_mongo(cls, id): #cls = currentClass
+    def from_mongo(cls, _id): #cls = currentClass
         blog_data = Database.find_one(collection='blogs',
-                                      query={'_id': id})
+                                      query={'_id': _id})
         return cls(**blog_data)
 
 
