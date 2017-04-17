@@ -1,0 +1,41 @@
+db.blogs.insert({"author": "Edison Villamor",
+"title": "My Blog Title",
+"description": "My life is a blah. Welcome to my blog nigga.",
+"author_id": "4fdf845927bc46059c4e3b00a9a7eaea",
+"_id": "58ef7eae2662fc2f20d93cdd"})
+db.blogs.insert({"author": "Joenabie Gamao",
+"title": "My Blog Title",
+"description": "My life is a blah. Welcome to my blog nigga. Abzz",
+"author_id": "55bff1ec19f646d3969402cb486f4184",
+"_id": "58ee42142662fc2606377ec0"})
+
+db.blogs.insert({"author": "Edison Villamor",
+"title": "My Blog Title Part 2",
+"description": "About my skemaduu",
+"author_id": "4fdf845927bc46059c4e3b00a9a7eaea",
+"_id": "58ef80532662fc2f4df7d8dd"})
+
+
+
+
+db.posts.insert({ "_id" : "1234",
+"blog_id" : "58ef7eae2662fc2f20d93cdd",
+"title" : "Sample Title post",
+"content" : "Sample Content",
+"created_date" : ISODate("1994-10-28T00:00:00Z"),
+"author" : "Edison" })
+
+db.posts.insert({ "_id" : "123456",
+"blog_id" : "58ef7eae2662fc2f20d93cdd",
+"title" : "Post #2",
+"content" : "The Jury has spoken, APPLE rocks",
+"created_date" : ISODate("1994-10-28T00:00:00Z"),
+"author" : "Edison" })
+
+db.posts.insert({ "_id" : "12345",
+"blog_id" : "58ee42142662fc2606377ec0",
+"title" : "Sample Title post of Abz",
+"content" : "Sample Content",
+"created_date" : ISODate("1994-10-28T00:00:00Z"),
+"author" : "Abz" })
+62fc2f20d93cdd"),"title": "Sample Title post", "content": "Sample Content","created_date": ISODate("1994-10-28T00:00:00Z"),"author": "Edison"})

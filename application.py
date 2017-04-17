@@ -1,6 +1,6 @@
 from flask import render_template, request, session
-
 from src.common.database import Database
+from src.models.blog import Blog
 from src.models.user import User
 
 __author__ = 'jmgamao'
@@ -46,7 +46,6 @@ def register_user():
     email = request.form['email']
     password = request.form['password']
     User.register(email,password)
-
     return render_template('profile.html', email = session.get('email'))
 
 
@@ -61,6 +60,14 @@ def user_blogs(user_id=None):
 
     return render_template("user_blogs.html", blogs=blogs, email = user.email)
 
+@app.route('/posts/<string:blog_id>')
+def blog_posts(blog_id):
+    blog = Blog.from_mongo(blog_id)
+    posts = blog.get_posts()
+
+    return render_template('posts.html', posts=posts, blog_title=blog.title)
+
+
 @app.route('/hello/')
 @app.route('/hello/<name>')
 def hello(name=None):
@@ -71,6 +78,7 @@ def hello(name=None):
 def show_user_profile(username):
     # show the user profile for that user
     return 'User %s' % username
+
 
 if __name__ == '__main__':
    ## app.run(debug=True)
