@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container page-form">
+    <h1>New Blog</h1>
+    <p class="important">
+      Adding a new blog
+    </p>
+
+        <form id="new-blog" action="/blogs/new" method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description">
+            </div>
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-success" id="submit-button">Add new blog</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

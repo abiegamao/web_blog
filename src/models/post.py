@@ -49,4 +49,7 @@ class Post(object): #this post comes from an object
     def from_blog(id):
         return [post for post in Database.find(collection='posts', query={'blog_id': id})]
 
+    def __getitem__(self, item):
+        return getattr(self, item)
+
 

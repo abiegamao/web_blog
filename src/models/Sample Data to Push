@@ -39,3 +39,7 @@ db.posts.insert({ "_id" : "12345",
 "created_date" : ISODate("1994-10-28T00:00:00Z"),
 "author" : "Abz" })
 62fc2f20d93cdd"),"title": "Sample Title post", "content": "Sample Content","created_date": ISODate("1994-10-28T00:00:00Z"),"author": "Edison"})
+
+
+db.users.insert({"_id" : "4fdf845927bc46059c4e3b00a9a7eatb", "password" : "123", "email" : "joenabie@me.com"})
+db.blogs.insert({"author": "Joenabie Gamao", "title": "My Blog Title 2",  "description": "My life is a blah. Welcome to my blog nigga. Abzz",  "author_id": "4fdf845927bc46059c4e3b00a9a7eatb",  "_id": "58ee42142662fc2606377ss0"})

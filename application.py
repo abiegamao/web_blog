@@ -1,3 +1,4 @@
+from flask import make_response
 from flask import render_template, request, session
 from src.common.database import Database
 from src.models.blog import Blog
@@ -56,9 +57,9 @@ def user_blogs(user_id=None):
         user = User.get_by_id(user_id)
     else:
         user = User.get_by_email(session.get('email'))
-    blogs = user.get_blogs()
+    blogsx = user.get_blogs()
 
-    return render_template("user_blogs.html", blogs=blogs, email = user.email)
+    return render_template("user_blogs.html", blogs=blogsx, email = user.email)
 
 @app.route('/posts/<string:blog_id>')
 def blog_posts(blog_id):
@@ -66,6 +67,21 @@ def blog_posts(blog_id):
     posts = blog.get_posts()
 
     return render_template('posts.html', posts=posts, blog_title=blog.title)
+
+
+@app.route('/blogs/new', methods=['POST', 'GET'])
+def create_new_blog():
+    if request.method == 'GET':
+        return  render_template('new_blog.html')
+    else:
+        title = request.form['title']
+        description = request.form['description']
+        user = User.get_by_email(session.get('email'))
+        user.new_blog(title, description)
+
+        return make_response(user_blogs(user._id))
+
+
 
 
 @app.route('/hello/')

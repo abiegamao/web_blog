@@ -13,6 +13,10 @@ class Blog(object):
         self._id = uuid.uuid4().hex if _id is None else _id
 
 
+    def __getitem__(self, item):
+        return getattr(self, item)
+
+
     def new_post(self, title, content, date=datetime.datetime.utcnow() ):
 
         post = Post(blog_id=self._id,
@@ -49,3 +53,5 @@ class Blog(object):
         blogs = Database.find(collection='blogs',
                                       query={'author_id': author_id})
         return [cls(**blog) for blog in blogs]
+
+
