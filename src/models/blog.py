@@ -11,7 +11,6 @@ class Blog(object):
         self.author_id = author_id
         self._id = uuid.uuid4().hex if _id is None else _id
 
-
     def __getitem__(self, item):
         return getattr(self, item)
 
@@ -45,7 +44,6 @@ class Blog(object):
         blog_data = Database.find_one(collection='blogs',
                                       query={'_id': _id})
         return cls(**blog_data)
-
 
     @classmethod
     def find_by_author_id(cls, author_id):
