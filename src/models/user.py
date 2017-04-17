@@ -1,11 +1,7 @@
-import datetime
+import datetime, uuid
 from flask import session
-
 from src.common.database import Database
-import uuid
-#from flask import session
 from src.models.blog import Blog
-
 
 class User(object):
     def __init__(self, email, password, _id=None):
@@ -33,7 +29,6 @@ class User(object):
         if user is not None:
             #check the password
             return user['password'] == password
-
         return False
 
     @classmethod
@@ -58,13 +53,11 @@ class User(object):
     def logout():
         session['email'] = None
 
-
     def json(self):
         return {
             'email': self.email,
             '_id': self._id,
             'password': self.password, #not safe
-
         }
 
     def get_blogs(self):
@@ -80,7 +73,6 @@ class User(object):
                     title=title,
                     description=description,
                     author_id=self._id)
-
         blog.save_to_mongo()
 
 

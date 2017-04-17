@@ -2,6 +2,7 @@ from flask import make_response
 from flask import render_template, request, session
 from src.common.database import Database
 from src.models.blog import Blog
+from src.models.post import Post
 from src.models.user import User
 
 __author__ = 'jmgamao'
@@ -66,7 +67,7 @@ def blog_posts(blog_id):
     blog = Blog.from_mongo(blog_id)
     posts = blog.get_posts()
 
-    return render_template('posts.html', posts=posts, blog_title=blog.title)
+    return render_template('posts.html', posts=posts, blog_title=blog.title, blog_id = blog_id)
 
 
 @app.route('/blogs/new', methods=['POST', 'GET'])
@@ -81,7 +82,19 @@ def create_new_blog():
 
         return make_response(user_blogs(user._id))
 
+@app.route('/posts/new/<string:blog_id>', methods=['POST', 'GET'])
+def create_new_post(blog_id):
+    if request.method == 'GET':
+        return  render_template('new_post.html', blog_id=blog_id)
+    else:
+        title = request.form['title']
+        content = request.form['content']
+        user = User.get_by_email(session.get('email'))
 
+        new_post = Post(blog_id, title, content, user.email)
+        new_post.save_to_mongo()
+
+        return make_response(blog_posts(blog_id))
 
 
 @app.route('/hello/')
@@ -97,5 +110,4 @@ def show_user_profile(username):
 
 
 if __name__ == '__main__':
-   ## app.run(debug=True)
     app.run(port=4990, debug=True)

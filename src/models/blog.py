@@ -9,7 +9,6 @@ class Blog(object):
         self.title = title
         self.description = description
         self.author_id = author_id
-        # self.created_date = now
         self._id = uuid.uuid4().hex if _id is None else _id
 
 
